@@ -1,6 +1,6 @@
 # Document files are kept locally, in order to not leak our emails etc.
-sneakspeak.pdf
-sneakspeak.tex
+# sneakspeak.pdf
+# sneakspeak.tex
 
 .DS_Store
 
