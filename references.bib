@@ -1,0 +1,132 @@
+
+% ------------------------------------------
+% Example list of references 
+% Contains those for thesis template.
+% Bibtex file can contain many references and only
+% those you actually cite will appear in bibliography list
+%
+% This file has some old classics as examples
+% (Everyone should read those. They are rather interesting).
+% ------------------------------------------
+
+% ------------------------------------------
+% Created by : Erno Salminen (ES), 2014-08-08
+% Modified   :
+% ------------------------------------------
+
+% ------------------------------------------
+% E.g. emacs is good for editing this file 
+% because is has a separate bibtex mode which 
+% gives additional menus for adding new refs.
+%
+% Put 'and' between author names!
+% Use braces to get capital letters correctly in titles, 
+%  e.g {System-on-Chip}.
+% Use 'and others' to produce 'et al.' in your bibliography.
+% The order does not matter for bibtex compilation 
+%  (but affects understandability).
+% ------------------------------------------
+
+% --------------------------
+% Example of journal artcile
+% --------------------------
+% In Latex doc, type \cite{ref_id} to add ref to this record. 
+% ref_id is of type <Firstauthor><Year><Letter>
+% <Firstauthor> = last name of first author, e.g. salminen
+% <Year>        = two numbers, e.g. 03
+% <Letter>      = 'running number' to distinquish several refs of
+%                 one author on a given year, start with a
+% use only small case letters and no white spaces, e.g. salminen03a
+% Explanations from: http://www.ecst.csuchico.edu/~jacobsd/bib/formats/bibtex.html
+% Article{ref_id, 
+% author = {The name(s) of the author(s), in the format
+%           described in the LaTeX book. }, 
+% title = {The work's title, typed as explained in the LaTeX book. }, 
+% journal = {A journal name. Abbreviations are provided for many journals. }, 
+% year = { The year of publication or, for an unpublished work, 
+%          the year it was written. Generally it should consist 
+%          of four numerals, such as 1984},
+% OPTkey = {Used for alphabetizing, cross referencing, and creating a
+%           label when the ``author'' information is missing. 
+%           This field should not be confused with the key that 
+%           appears in the cite command and at the beginning 
+%           of the database entry. }, 
+% OPTvolume = {The volume of a journal or multi-volume book. }, 
+% OPTnumber = {The number of a journal, magazine, technical report, 
+%              or of a work in a series. An issue of a journal or 
+%              magazine is usually identified by its volume and
+%              number; the organization that issues a technical 
+%              report usually gives it a number; and sometimes 
+%              books are given numbers in a namedseries. }, 
+% OPTpages = { One or more page numbers or range of numbers, 
+%              such as 42--111 or 7,41,73--97 
+%              or 43+ (the `+' in this last example indicates pages 
+%              following that don't form a simple range). To
+%              make it easier to maintain Scribe-compatible databases, 
+%              the standard styles convert a single dash (as in 7-33) 
+%              to the double dash used in TeX to denote number 
+%              ranges (as in 7--33). }, 
+% OPTmonth = {The month in which the work was published or, 
+%             for an unpublished work, in which it was written. 
+%             You should use the standard three-letter abbreviation,
+%             as described in Appendix B.1.3 of the LaTeX book. }, 
+% OPTnote = {Any additional information that can help the reader. 
+%            The first word should be capitalized. }, 
+% OPTannote = {An annotation. It is not used by the standard bibliography 
+%              styles, but may be used by others that produce
+%              an annotated bibliography. } %}
+% --------------------------
+
+
+@STRING(p-ieee    = "Proc. IEEE")
+@STRING(t-comp    = "IEEE Trans. Comput.")
+@STRING(t-casii   = "IEEE Trans. Circuits Syst. II")
+@STRING(t-casvt   = "IEEE Trans. Circuits Syst. Video Technol.")
+@STRING(t-vlsi    = "IEEE Trans. VLSI Syst.")
+@STRING(t-comm    = "IEEE Trans. Commun.")
+@STRING(t-sp      = "IEEE Trans. Signal Processing")
+@STRING(t-pds     = "IEEE Trans. Parallel Distrib. Syst.")
+@STRING(t-it      = "IEEE Trans. Inform. Theory")
+@STRING(t-assp    = "IEEE Trans. Acoust., Speech, Signal Processing") 
+@STRING(t-ae      = "IEEE Trans. on Audio and Electroacoustics")
+@STRING(t-emc     = "IEEE Trans. Electromagn. Compat.")
+@STRING(t-ce      = "IEEE Trans. Consumer Electron.")
+@STRING(j-ssc     = "IEEE J. Solid-State Circuits")
+@STRING(t-cadics  = "IEEE Trans. Computer-Aided Design of Integrated Circuits 
+                     and Systems")
+@STRING(m-comm    = "IEEE Commun. Mag.")
+@STRING(int-comp  = "Integrated Computer-Aided Eng.")
+@STRING(m-dtc     = "IEEE Des. Test Comput.")
+@STRING(j-acm     = "Journal of the ACM")
+@STRING(j-vlsisp  = "Journal of VLSI Signal Processing")
+@STRING(sp        = "Signal Processing")
+@STRING(rti       = "Real-Time Imaging")
+@STRING(iee-com   = "IEE Proceedings - Communications")
+@STRING(mc        = "Mathematics of Computation")
+@STRING(el        = "Electronics Letters")
+@STRING(cssp      = "Circuits, Systems, and Signal Processing")
+@STRING(pc        = "Parallel Computing")
+@STRING(iscas     = "Proc. IEEE Int. Symposium on Circuits and Systems")
+@STRING(icassp    = "Proc. IEEE Int. Conference on Acoustics, Speech, and 
+                     Signal Processing")
+@STRING(cicc      = "Proc. IEEE Custom Integrated Circuits Conference")
+@STRING{spe      = "Software - Practice and Experience"}
+@STRING{pldi     = "Proc. Conf. on Programming Languages Design and Implementation"}
+
+
+@STRING{kap      ="Kluwer Academic Publishers"}
+@STRING{tresoc   ="Intl. Symposium on Soc"}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% REFS
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@Book{gcm_implementation,
+	author={Google},
+	title={Implementing an HTTP Connection Server},
+	year={2016},
+	note={Accessed 1.3.2016. [Online]. Available at: \url{https://developers.google.com/cloud-messaging/http}}
+}
