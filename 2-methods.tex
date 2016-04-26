@@ -2,32 +2,35 @@
 This section gives a quick glance at the technologies used in the application.
 
 \subsection{Android client}
+The Android application was written as a quick prototype to demonstrate the proof-of-concept. Code was written using the native SDK and a JVM-language called Kotlin, which compiles to Java bytecode. The main goal of the prototype was to allow messaging between devices via the provided self-hosted server. It is noteworthy that the code was written fast with functionality in mind, with little regards to maintainability or good practices. So if you take a look at it, don't judge us.
+
+\subsubsection{Structure}
+
+The overall application structure is partially messy but most of the classes have a clear area of responsibility. The application has three activities: MainActivity, which handles switching between lists of servers, users and channels; RegisterActivity, which surprisingly handles registration stuff; and ChatActivity, which is used display the chat window for private and channel messaging. Beside MainActivity most of the interaction logic was implemented using Fragments.
+
+The application has four ''manager`` singletons: DatabaseManager, which handles data persistence (basically just servers); HttpManager, which is a bloated badly designed class that handles calls to server API; JsonManager, which is used to predefine possible serialization and deserialization routines; and SettingsManager, which could be used to save user settings (currently just saves registration data for application to remember). 
+
+%todo{gcm, receivers, lists and data?}
+
+\subsubsection{Development}
+
+The application was written with a sort of explorative mind set. A lot of the components used, like receivers (which basically were used to deliver messages internally from one class to another), were not too familiar and it took time to understand how they'd work. The application also served as a playground of sorts, and parts of it were initially implemented very differently. For example, at some point the UI-layouts were partially implemented with Anko DSL instead of the traditional XML-approach. After trying it out it was decided that XML would be the way to go and parts that used DSL were refactored.
+
+During the development process we faced many problems with the platform. Some were easier to debug, others took lots of time. For example Proguard, which is a program used to obfuscate and minify Java bytecode, didn't cooperate at times and at the end of the project our \verb|proguard-rules.pro|-file was roughly 150 lines including comments and whitespace. Due to obfuscation we also had some problems with debugging stacktraces, which were usually something like ''\verb|exception at a.b.c.d|``. 
 
 \subsection{Node.js server}
-The server is a Node.js application, more specifically Sails.js application. Users and channels are managed and stored on the server.
-Messages instead are just transmitted to the receiver or receivers without storing them to the database. 
+The server is a Node.js application, more specifically Sails.js application. Users and channels are managed and stored on the server. Messages instead are just transmitted to the receiver or receivers without storing them to the database. 
 
 \subsubsection{Technology Choices}
-Node.js was intuitive choice for backend application because both team members were already familiar with JavaScript and Node.js.
-Node.js is a JavaScript runtime which is often used as a web server application[1]. To make developing faster we chose to use Sails.js.
-Sails.js is a MVC (=Model View Control) framework built on top of Node.js[2]. There is plenty of documentation and support available
-online for both Node.js and Sails.js.
+Node.js was intuitive choice for backend application because both team members were already familiar with JavaScript and Node.js. Node.js is a JavaScript runtime which is often used as a web server application[1]. To make developing faster we chose to use Sails.js. Sails.js is a MVC (=Model View Control) framework built on top of Node.js[2]. There is plenty of documentation and support available online for both Node.js and Sails.js.
 % 1: https://nodejs.org/en/
 % 2: http://sailsjs.org/
 
-The use of Sails.js helped us not start from a scratch and accelerated the development process with integrated app generator and
-Blueprints API generator. There is also powerful Waterline ORM integrated in Sails.js. We chose to use the Waterline ORM with PostgreSQL
-adapter. First we planned to use SQLite database but the adapter for SQLite couldn't automate many-to-many associations as we wanted.
-Also using PostgreSQL enables us to use free version of Heroku for demo application.
+The use of Sails.js helped us not start from a scratch and accelerated the development process with integrated app generator and Blueprints API generator. There is also powerful Waterline ORM integrated in Sails.js. We chose to use the Waterline ORM with PostgreSQL adapter. First we planned to use SQLite database but the adapter for SQLite couldn't automate many-to-many associations as we wanted. Also using PostgreSQL enables us to use free version of Heroku for demo application.
 
-Sails.js framework provides HTTP and WebSocket connections for API. For Google Cloud Messaging, GCM, connections we needed something
-else. First we implemented a GCM HTTP application server with sails-hook-push package[1]. Later we decided to use GCM also for
-upstream messages from the client to the application server. For that we had to fork and edit an existing node-gcm-ccs[2] library to
-implement the newest
-specification of GCM XMPP connection[3]. To add GCM XMPP listeners we created a Sails.js Project Hook.
+Sails.js framework provides HTTP and WebSocket connections for API. For Google Cloud Messaging, GCM, connections we needed something else. First we implemented a GCM HTTP application server with sails-hook-push package[1]. Later we decided to use GCM also for upstream messages from the client to the application server. For that we had to fork and edit an existing node-gcm-ccs[2] library to implement the newest specification of GCM XMPP connection[3]. To add GCM XMPP listeners we created a Sails.js Project Hook.
 
-Unfortunately we couldn't solve the problems with upstream messages. Some of the messages vanished or got delayed by hours. Because of
-this we added GCM listener equivalents to the HTTP API.
+Unfortunately we couldn't solve the problems with upstream messages. Some of the messages vanished or got delayed by hours. Because of this we added GCM listener equivalents to the HTTP API.
 % 1: https://www.npmjs.com/package/sails-hook-push
 % 2: https://github.com/jacobp100/node-gcm-ccs
 % 3: https://developers.google.com/cloud-messaging/xmpp-server-ref#downstream-xmpp-messages-json
