@@ -24,15 +24,15 @@ During the development process we faced many problems with the platform. Some we
 The server is a Node.js application, more specifically Sails.js application. Users and channels are managed and stored on the server. Messages instead are just transmitted to the receiver or receivers without storing them to the database. 
 
 \subsubsection{Technology Choices}
-Node.js was intuitive choice for backend application because both team members were already familiar with JavaScript and Node.js. Node.js is a JavaScript runtime which is often used as a web server application[1]. To make developing faster we chose to use Sails.js. Sails.js is a MVC (=Model View Control) framework built on top of Node.js[2]. There is plenty of documentation and support available online for both Node.js and Sails.js.
+Node.js was intuitive choice for backend application because both team members were already familiar with JavaScript and Node.js. Node.js is a JavaScript runtime which is often used as a web server application \cite{node}. To make developing faster we chose to use Sails.js. Sails.js is a MVC (=Model View Control) framework built on top of Node.js \cite{sails}. There is plenty of documentation and support available online for both Node.js and Sails.js.
 % 1: https://nodejs.org/en/
 % 2: http://sailsjs.org/
 
 The use of Sails.js helped us not start from a scratch and accelerated the development process with integrated app generator and Blueprints API generator. There is also powerful Waterline ORM integrated in Sails.js. We chose to use the Waterline ORM with PostgreSQL adapter. First we planned to use SQLite database but the adapter for SQLite couldn't automate many-to-many associations as we wanted. Also using PostgreSQL enables us to use free version of Heroku for demo application.
 
-Sails.js framework provides HTTP and WebSocket connections for API. For Google Cloud Messaging, GCM, connections we needed something else. First we implemented a GCM HTTP application server with sails-hook-push package[1]. Later we decided to use GCM also for upstream messages from the client to the application server. For that we had to fork and edit an existing node-gcm-ccs[2] library to implement the newest specification of GCM XMPP connection[3]. To add GCM XMPP listeners we created a Sails.js Project Hook.
+Sails.js framework provides HTTP and WebSocket connections for API. For Google Cloud Messaging, GCM, connections we needed something else. First we implemented a GCM HTTP application server with sails-hook-push package \cite{sails-hook}. Later we decided to use GCM also for upstream messages from the client to the application server. For that we had to fork and edit an existing node-gcm-ccs \cite{gcm-ccs} library to implement the newest specification of GCM XMPP connection \cite{gcm-xmpp}. To add GCM XMPP listeners we created a Sails.js Project Hook.
 
 Unfortunately we couldn't solve the problems with upstream messages. Some of the messages vanished or got delayed by hours. Because of this we added GCM listener equivalents to the HTTP API.
 % 1: https://www.npmjs.com/package/sails-hook-push
 % 2: https://github.com/jacobp100/node-gcm-ccs
-% 3: https://developers.google.com/cloud-messaging/xmpp-server-ref#downstream-xmpp-messages-json
+% 3: https://developers.google.com/cloud-messaging/xmpp-server-ref
