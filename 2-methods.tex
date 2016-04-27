@@ -6,11 +6,13 @@ The Android application was written as a quick prototype to demonstrate the proo
 
 \subsubsection{Structure}
 
-The overall application structure is partially messy but most of the classes have a clear area of responsibility. The application has three activities: MainActivity, which handles switching between lists of servers, users and channels; RegisterActivity, which surprisingly handles registration stuff; and ChatActivity, which is used display the chat window for private and channel messaging. Beside MainActivity most of the interaction logic was implemented using Fragments.
+The overall application structure is partially messy but most of the classes have a clear area of responsibility. The code base can be roughly partitioned into activities and fragments, different recyclerview (list-component) implementations, a couple of manager singletons, gcm-communication classes and resultreceivers.
+
+The application has three activities: MainActivity, which handles switching between lists of servers, users and channels; RegisterActivity, which surprisingly handles registration stuff; and ChatActivity, which is used display the chat window for private and channel messaging. Beside MainActivity most of the user interaction logic was implemented using Fragments. Due to the nature of the application there are lots of different lists. These were implemented using recyclerviews, each having their own adapter.
 
 The application has four ''manager`` singletons: DatabaseManager, which handles data persistence (basically just servers); HttpManager, which is a bloated badly designed class that handles calls to server API; JsonManager, which is used to predefine possible serialization and deserialization routines; and SettingsManager, which could be used to save user settings (currently just saves registration data for application to remember). 
 
-%todo{gcm, receivers, lists and data?}
+Gcm-packages were required in the application in two places. During registration the client generates an unique token using RegistrationIntentService and sends it to the server, completing the registration. SneakGcmListenerService handles capturing downstream messages from the cloud, forwarding them to the fragment containing the chat logic. Registration and messaging data was forwarded internally using resultreceivers.
 
 \subsubsection{Development}
 
@@ -34,6 +36,3 @@ Unfortunately we couldn't solve the problems with upstream messages. Some of the
 % 1: https://www.npmjs.com/package/sails-hook-push
 % 2: https://github.com/jacobp100/node-gcm-ccs
 % 3: https://developers.google.com/cloud-messaging/xmpp-server-ref#downstream-xmpp-messages-json
-
-
-\subsection{Google Cloud Integration}
